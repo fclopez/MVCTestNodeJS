@@ -1,0 +1,16 @@
+{
+  "development":{
+    "username":"",
+    "password":"",
+    "database":"",
+    "host":"",
+    "port":"",
+    "dialectOptions":{
+      "ssl":true
+    },
+    "ssl":true,
+    "dialect":"postgres",
+    "operatorAliases":false
+  }
+
+}
