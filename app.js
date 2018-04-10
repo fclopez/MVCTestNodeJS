@@ -4,8 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+/*Modelos DB*/
+var models = require('./models/index');
+
+/*enlace de rutas*/
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var semilleros = require('./routes/semilleros');
 
 var app = express();
 
@@ -19,8 +24,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+/*uso de rutas*/
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/semilleros', semilleros);
+
+/*Sincroninzacion DB*/
+models.sequelize.sync()
+.then(
+  function(){
+    console.log("Se conectó a la DB");
+  }
+).catch(
+  function(error){
+    console.log("Error en la conexion: "+error);
+  }
+);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
